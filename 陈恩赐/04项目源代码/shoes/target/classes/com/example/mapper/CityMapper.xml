@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.CityMapper">
+	
+	<resultMap id="CityResultMap" type="com.example.model.City">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="state" property="state" />
+		<result column="country" property="country" />
+		
+	</resultMap>
+	
+	<select id="findAllCity" resultMap="CityResultMap">
+		select id, name, state, country from city
+	</select>
+	
+		<select id="findOneCity" resultMap="CityResultMap"  parameterType="int">
+		select id, name, state, country from city where id=#{id}
+	</select>
+	
+	<update id="insertCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id">
+		update city set name=#{name},state=#{state},country=#{country} where id=#{id}
+	</update>
+	
+	
+	<insert id="updateCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id">
+		insert into city(name, state, country) values(#{name},#{state},#{country})
+		
+	</insert>
+	
+	
+	<insert id="deleteCity" parameterType="int" >
+		delete from city where id=#{id}
+		
+	</insert>
+	
+	
+	
+</mapper>

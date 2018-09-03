@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.UserinfoMapper">
+	
+	<resultMap id="UserinfoResultMap" type="com.example.model.Userinfo">
+		<id column="userid" property="userid" />
+		<result column="account" property="account" />
+		<result column="pwd" property="pwd" />
+		<result column="sex" property="sex" />
+		<result column="tel" property="tel" />
+		<result column="email" property="email" />
+		
+	</resultMap>
+	
+	<select id="selectUsed" resultMap="UserinfoResultMap"  parameterType="com.example.model.Userinfo">
+		select * from userinfo where userid=#{arg0} 
+	</select>
+	
+	<select id="findAllUser" resultMap="UserinfoResultMap"  parameterType="com.example.model.Userinfo">
+		select * from userinfo
+	</select>
+	
+	
+	<select id="doSearchByName" resultMap="UserinfoResultMap"  parameterType="com.example.model.Userinfo">
+		select * from userinfo where account like#{0}
+	</select>
+	
+	<insert id="doUserDel"   parameterType="com.example.model.Userinfo" useGeneratedKeys="true">
+		delete from userinfo where userid = #{arg0}
+	</insert>
+	
+	<select id="loginUser" resultMap="UserinfoResultMap"  parameterType="com.example.model.Userinfo">
+		select * from userinfo where account=#{arg0} and pwd=#{arg1}
+	</select>
+	
+	<select id="loginUsed" resultMap="UserinfoResultMap"  parameterType="com.example.model.Userinfo">
+		select * from userinfo where account=#{arg0} 
+	</select>
+	
+	<insert id="insertUserinfo" parameterType="com.example.model.Userinfo" useGeneratedKeys="true" keyProperty="userid">
+		insert into userinfo(account,pwd,sex,tel,email) values(#{account},#{pwd},#{sex},#{tel},#{email})
+		
+	</insert>
+	
+	<update id="updateUser" parameterType="com.example.model.Userinfo" useGeneratedKeys="true" keyProperty="userid">
+		update userinfo set account=#{account},pwd=#{pwd},sex=#{sex},tel=#{tel},email=#{email} where account=#{account}
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.ProductMapper">
+	
+	<resultMap id="ProductResultMap" type="com.example.model.Product">
+		<id column="productid" property="productid" />
+		<result column="price" property="price" />
+		<result column="pname" property="pname" />
+		<result column="pmodel" property="pmodel" />
+		<result column="ptype" property="ptype" />
+		<result column="pdescribe" property="pdescribe" />
+		<result column="prepicture" property="prepicture" />		
+	</resultMap>
+	
+	<select id="findAllProduct" resultMap="ProductResultMap">
+		select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture  from productinfo
+	</select>
+	
+	<select id="doSearchProduct" resultMap="ProductResultMap"  parameterType="String">
+		select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where pname like #{arg0}
+	</select>
+	
+	
+	
+	
+	<select id="doSearchProductByType" resultMap="ProductResultMap"  parameterType="String">
+		select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{arg0}
+	</select>
+	
+	<select id="doSearchAllProductSort" resultMap="ProductResultMap"  parameterType="String" >
+				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{arg0} ORDER BY price desc
+	</select>
+	
+		<select id="doSearchAllProductSortAsc" resultMap="ProductResultMap"  parameterType="String" >
+				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{arg0} ORDER BY price asc
+	</select>
+	
+	
+<!-- 	所有分页 -->
+	<select id="doAllSearchByPageAsc" resultMap="ProductResultMap"  parameterType="int" >
+				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo  ORDER BY price asc limit #{arg0},#{arg1}
+	</select>
+	
+	<select id="doAllSearchByPageDesc" resultMap="ProductResultMap"  parameterType="int" >
+				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo  ORDER BY price asc limit #{arg0},#{arg1}
+	</select>
+	
+<!-- 	删除商品 -->
+	<insert id="deletePro" parameterType="com.example.model.Product" useGeneratedKeys="true" >
+				delete from productinfo where productid =#{arg0}
+		
+	</insert>
+
+	<insert id="doAdd" parameterType="com.example.model.Product" useGeneratedKeys="true" >
+				insert into productinfo (price,pname,pmodel,PTYPEID,PDESCRIBE,PREPICTURE) VALUES (#{arg0},#{arg1},#{arg2},#{arg3},#{arg4},#{arg5})
+		
+	</insert>	
+
+
+<!-- 	搜索分页 -->
+<!-- 	<select id="doSearchByPageAsc" resultMap="ProductResultMap"  parameterType="model.Product" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{0} ORDER BY price asc limit #{1},#{2} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="doSearchByPageDesc" resultMap="ProductResultMap"  parameterType="model.Product" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{0} ORDER BY price desc limit #{1},#{2} -->
+<!-- 	</select> -->
+	
+	
+	
+	
+	
+<!-- 	<update id="insertCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id"> -->
+<!-- 		update city set name=#{name},state=#{state},country=#{country} where id=#{id} -->
+<!-- 	</update> -->
+	
+	
+<!-- 	<insert id="updateCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id"> -->
+<!-- 		insert into city(name, state, country) values(#{name},#{state},#{country}) -->
+		
+<!-- 	</insert> -->
+	
+	
+<!-- 	<insert id="deleteCity" parameterType="int" > -->
+<!-- 		delete from city where id=#{id} -->
+		
+<!-- 	</insert> -->
+	
+	
+	
+</mapper>

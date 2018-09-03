@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.CartMapper">
+	
+	<resultMap id="CartResultMap" type="com.example.model.Cart">
+		<id column="cartid" property="cartid" />
+		<result column="price" property="price" />
+		<result column="pname" property="pname" />
+		<result column="productid" property="productid" />
+		<result column="userid" property="userid" />
+		<result column="pnum" property="pnum" />
+		<result column="picture" property="picture" />	
+		<result column="price_total" property="price_total" />	
+	</resultMap>
+	
+	<select id="findUserPro" resultMap="CartResultMap" parameterType="int">
+		select *  from cart where userid = #{arg0}
+	</select>
+	
+	<insert id="insertCart" parameterType="com.example.model.Cart" useGeneratedKeys="true" >
+				insert into cart(userid,productid,pname,price,pnum,picture,price_total) values(#{arg0},#{arg1},#{arg2},#{arg3},#{arg4},#{arg5},#{arg6})
+		
+	</insert>
+	
+	<insert id="deleteCart" parameterType="com.example.model.Cart" useGeneratedKeys="true" >
+				delete from cart where cartid =#{arg0}
+		
+	</insert>
+	
+	<insert id="deleteProFromCart" parameterType="com.example.model.Cart" useGeneratedKeys="true" >
+				delete from cart where productid =#{arg0}
+		
+	</insert>
+<!-- 	<select id="doSearchProduct" resultMap="ProductResultMap"  parameterType="String"> -->
+<!-- 		select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where pname like #{pname} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="doSearchProductByType" resultMap="ProductResultMap"  parameterType="String"> -->
+<!-- 		select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{ptype} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="doSearchAllProductSort" resultMap="ProductResultMap"  parameterType="String" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{0} ORDER BY price desc -->
+<!-- 	</select> -->
+	
+<!-- 		<select id="doSearchAllProductSortAsc" resultMap="ProductResultMap"  parameterType="String" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{0} ORDER BY price asc -->
+<!-- 	</select> -->
+	
+	
+<!-- 	所有分页 -->
+<!-- 	<select id="doAllSearchByPageAsc" resultMap="ProductResultMap"  parameterType="int" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo  ORDER BY price asc limit #{0},#{1} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="doAllSearchByPageDesc" resultMap="ProductResultMap"  parameterType="int" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo  ORDER BY price asc limit #{0},#{1} -->
+<!-- 	</select> -->
+	
+
+<!-- 	搜索分页 -->
+<!-- 	<select id="doSearchByPageAsc" resultMap="ProductResultMap"  parameterType="model.Product" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{0} ORDER BY price asc limit #{1},#{2} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="doSearchByPageDesc" resultMap="ProductResultMap"  parameterType="model.Product" > -->
+<!-- 				select productid,price,pname,pmodel,ptypeid,pdescribe,prepicture from productinfo where ptypeid like #{0} ORDER BY price desc limit #{1},#{2} -->
+<!-- 	</select> -->
+	
+	
+	
+	
+	
+<!-- 	<update id="insertCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id"> -->
+<!-- 		update city set name=#{name},state=#{state},country=#{country} where id=#{id} -->
+<!-- 	</update> -->
+	
+	
+<!-- 	<insert id="updateCity" parameterType="com.example.model.City" useGeneratedKeys="true" keyProperty="id"> -->
+<!-- 		insert into city(name, state, country) values(#{name},#{state},#{country}) -->
+		
+<!-- 	</insert> -->
+	
+	
+<!-- 	<insert id="deleteCity" parameterType="int" > -->
+<!-- 		delete from city where id=#{id} -->
+		
+<!-- 	</insert> -->
+	
+	
+	
+</mapper>
